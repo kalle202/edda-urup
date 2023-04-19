@@ -1,14 +1,10 @@
-import NextAuth, {NextAuthOptions} from "next-auth"
+import NextAuth, { NextAuthOptions } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
-import { PrismaClient } from "@prisma/client"
+import { prisma } from "@/util/prisma"
 import Stripe from "stripe"
 
-
-
-const prisma = new PrismaClient()
-
-export const authOptions : NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
     adapter: PrismaAdapter(prisma),
     secret: process.env.NEXTAUTH_SECRET,
     providers: [
@@ -36,6 +32,12 @@ export const authOptions : NextAuthOptions = {
           data: { stripeCustomerId: costumer.id },
         })
       },
-    }
+    },
+    callbacks: {
+      async session({ session, token, user }) {
+        session.user = user
+        return session
+      },
+    },
   }
   export default NextAuth(authOptions)
