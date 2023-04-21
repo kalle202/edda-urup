@@ -1,7 +1,7 @@
 "use client";
 
 import { Session } from "next-auth";
-import { signIn } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import Cart from "./Cart";
@@ -39,7 +39,7 @@ export default function Nav({ user }: Session) {
         {/* If the user is not signed in*/}
         {!user && (
           <li className="bg-teal-600 py-2 px-4 rounded-md">
-            <button onClick={() => signIn}>Sign in</button>
+            <button onClick={() => signIn()}>Sign in</button>
           </li>
         )}
         {user && (

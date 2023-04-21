@@ -26,6 +26,7 @@ export default function Product({
           alt={name}
           width={800}
           height={800}
+          priority={true}
         />
         <h1>{name}</h1>
         <h2 className="text-sm text-teal-700">

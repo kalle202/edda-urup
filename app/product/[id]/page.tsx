@@ -12,6 +12,7 @@ export default function page({ searchParams }: SearchParamsType) {
         width={600}
         height={600}
         className="w-full"
+        priority={true}
       />
       <div className="font-medium text-gray-700">
         <h1 className="text-2xl font-medium py-2">{searchParams.name}</h1>
